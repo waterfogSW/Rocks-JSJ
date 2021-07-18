@@ -1,4 +1,4 @@
-# YCSB 실험 데이터 MongoDB, RocksDB
+# YCSB 실험 MongoDB, RocksDB
 import os
 from pymongo import MongoClient, mongo_client
 
