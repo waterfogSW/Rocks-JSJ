@@ -17,12 +17,12 @@ def removeDatabase():
     mongo_client.drop_database('workload')
 
 def rocks_test_a(record):
-    ## RocksDB rocksdb.dir= 에 rocksDB 데이터 저장되는 경로 수정
+    ## RocksDB rocksdb.dir= 에 rocksDB 데이터 저장되는 경로, ../result는 결과가 저장되는 경로
     os.system("./bin/ycsb load rocksdb -s -P workloads/workloada -p rocksdb.dir=../data -target " + str(record) + " -p recordcount=100000")
     os.system("./bin/ycsb run rocksdb -s -P workloads/workloada -p rocksdb.dir=../data -target " + str(record) + " -p operationcount=100000" + " | grep 'Latency' > ../result" + str(record) + ".txt")
 
 def mongo_test_a(record):
-    ## MongoDB url : 'workload' 는 몽고디비 데이터 베이스 
+    ## MongoDB url : 'workload' 는 몽고디비 데이터 베이스, ../result는 결과가 저장되는 경로
     os.system("./bin/ycsb load rocksdb -s -P workloads/workloada -p mongodb.url='mongodb://127.0.0.1:27017/workload' -target " + str(record) + " -p recordcount=100000")
     os.system("./bin/ycsb run mongodb -s -P workloads/workloada -p -p mongodb.url='mongodb://127.0.0.1:27017/workload' -target " + str(record) + " -p operationcount=100000" + " | grep 'Latency' > ../result" + str(record) + ".txt")
 
