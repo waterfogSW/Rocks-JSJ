@@ -1,4 +1,5 @@
 # YCSB 실험 MongoDB, RocksDB
+## throughput제한하여 실험 2000, 4000, 6000 ....
 import os
 from pymongo import MongoClient, mongo_client
 
