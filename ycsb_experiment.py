@@ -23,8 +23,8 @@ def rocks_test_a(record):
 
 def mongo_test_a(record):
     ## MongoDB url : 'workload' 는 몽고디비 데이터 베이스, ../result는 결과가 저장되는 경로
-    os.system("./bin/ycsb load rocksdb -s -P workloads/workloada -p mongodb.url='mongodb://127.0.0.1:27017/workload' -target " + str(record) + " -p recordcount=100000")
-    os.system("./bin/ycsb run mongodb -s -P workloads/workloada -p -p mongodb.url='mongodb://127.0.0.1:27017/workload' -target " + str(record) + " -p operationcount=100000" + " | grep 'Latency' > ../result" + str(record) + ".txt")
+    os.system("./bin/ycsb load mongodb -s -P workloads/workloada -p mongodb.url='mongodb://127.0.0.1:27017/workload' -target " + str(record) + " -p recordcount=100000")
+    os.system("./bin/ycsb run mongodb -s -P workloads/workloada -p mongodb.url='mongodb://127.0.0.1:27017/workload' -target " + str(record) + " -p operationcount=100000" + " | grep 'Latency' > ../result" + str(record) + ".txt")
 
 def main():
     for i in range(1, 8):
