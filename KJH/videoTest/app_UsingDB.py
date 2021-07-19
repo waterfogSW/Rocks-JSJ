@@ -24,13 +24,11 @@ def upload_file():
             'contents': file.read()
         }
         db.video.insert_one(doc)
-
         return show_video(file.filename)
 
 @app.route('/video')
 def show_video(name):
     return render_template('video.html')
-
 
 if __name__ == '__main__':
     app.debug = False
