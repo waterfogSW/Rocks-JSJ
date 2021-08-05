@@ -4,13 +4,19 @@
 #include "rocksdb/db.h"
 using namespace std;
 
-const string PATH = "/home/san/workspace/Rocks-JSJ/RsDB";
+const string PATH_high = "./DB_high";
+const string PATH_low = "./DB_low";
 
 /* 
 flag : 1 - highbit sequence number
 flag : 0 - low bit sequence number
  */
 void test(int flag, int record_count) {
+    string PATH;
+    flag ? PATH = PATH_high : PATH = PATH_low;
+    string cmd = "rm -rf " + PATH;
+    system(cmd.c_str());
+
     rocksdb::DB* db;
     rocksdb::Options options;
     options.create_if_missing = true;
@@ -33,8 +39,6 @@ void test(int flag, int record_count) {
          : cout << "Sequence Number At Low  bits ";
     printf("Time: %lf\n", (double)(end - start)/CLOCKS_PER_SEC);
 
-    string cmd = "rm -rf " + PATH;
-    system(cmd.c_str());
     delete db;
 }
 
