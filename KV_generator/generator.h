@@ -14,7 +14,7 @@ idIndex         : index of pirmitive key in csv file
 vector<pair<string, string>> generateKV_csv(string filename, int timeIndex, int idIndex);
 
 /*
-generateKV_random - generate records from parsing CSV file
+generateKV_random - generate records by random
 record_count : number of records to generate
 */
 vector<pair<string, string>> generateKV_random(int record_count);

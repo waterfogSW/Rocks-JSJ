@@ -41,10 +41,16 @@ vector<pair<string, string>> generateKV_random(int record_count) {
     int index = 0;
 
     for (int i = 0; i < record_count; i++) {
+        string key;
+        string value;
+        
         string sequenceNum = to_string(index++);
         string deliveryTime = getCurrentTime();
 
-        result.push_back({sequenceNum, deliveryTime});
+        key     = sequenceNum + deliveryTime;
+        value   = sequenceNum + "11" + deliveryTime + "3645000";
+
+        result.push_back({key, value});
     }
 
     return result;

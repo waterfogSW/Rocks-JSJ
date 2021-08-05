@@ -2,6 +2,8 @@ CC = g++
 INC = -I${CURDIR}/include/
 CFLAGS = -g $(INC)
 
+LIBS= -lrocksdb
+
 OBJS = genByCSV.o genByRandom.o hello.o
 
 SRCS = $(OBJS:.o=.c)
@@ -15,7 +17,7 @@ TARGET = hello
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 $(TARGET) : $(OBJS)
-	$(CC) -o $(TARGET) $(OBJS)
+	$(CC) -o $(TARGET) $(OBJS) $(LIBS)
 
 all : $(TARGET)
 
