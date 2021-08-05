@@ -1,0 +1,29 @@
+{
+    "files.associations": {
+        "deque": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "iostream": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "algorithm": "cpp",
+        "iomanip": "cpp",
+        "variant": "cpp",
+        "*.tcc": "cpp",
+        "regex": "cpp",
+        "valarray": "cpp",
+        "future": "cpp",
+        "functional": "cpp",
+        "memory": "cpp",
+        "random": "cpp",
+        "fstream": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "numeric": "cpp",
+        "ostream": "cpp",
+        "ratio": "cpp",
+        "sstream": "cpp",
+        "streambuf": "cpp",
+        "stdexcept": "cpp"
+    }
+}

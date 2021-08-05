@@ -1,11 +1,13 @@
-#include <bits/stdc++.h>
-using namespace std;
+#ifndef _GEN_RECOREDS_RANDOM_H
+#define _GEN_RECOREDS_RANDOM_H
 
-#define RECORD_COUNT 1000000
+#include <bits/stdc++.h>
+
+using namespace std;
 
 template <typename... Args>
 string string_format(const std::string& format, Args... args);
-vector<pair<string, string>> generateKVPair(int record_count);
+vector<pair<string, string>> generateKV_random(int record_count);
 
 string getCurrentTime() {
     time_t curTime = time(NULL);
@@ -27,7 +29,7 @@ string string_format(const std::string& format, Args... args) {
     return std::string(buf.get(), buf.get() + size - 1);
 }
 
-vector<pair<string, string>> generateKVPair(int record_count) {
+vector<pair<string, string>> generateKV_random(int record_count) {
     try {
         if (record_count <= 0) throw record_count;
     } catch (int exception) {
@@ -48,13 +50,4 @@ vector<pair<string, string>> generateKVPair(int record_count) {
     return result;
 }
 
-int main() {
-    int i = 1;
-    string temp = to_string(i);
-
-    vector<pair<string, string>> records = generateKVPair(RECORD_COUNT);
-
-    for (size_t i = 0; i < RECORD_COUNT; i++) {
-        cout << records[i].first << ' ' << records[i].second << '\n';
-    }
-}
+#endif
