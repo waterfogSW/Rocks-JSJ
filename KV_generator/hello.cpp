@@ -6,19 +6,6 @@ using namespace std;
 
 const string PATH = "/home/san/workspace/Rocks-JSJ/RsDB";
 
-timespec diff(timespec start, timespec end) {
-    timespec temp;
-
-    if ((end.tv_nsec - start.tv_nsec) < 0) {
-        temp.tv_sec = end.tv_sec - start.tv_sec - 1;
-        temp.tv_nsec = 1000000000 + end.tv_nsec - start.tv_nsec;
-    } else {
-        temp.tv_sec = end.tv_sec - start.tv_sec;
-        temp.tv_nsec = end.tv_nsec - start.tv_nsec;
-    }
-    return temp;
-}
-
 int main(int argc, char const* argv[]) {
     rocksdb::DB* db;
     rocksdb::Options options;
@@ -31,23 +18,15 @@ int main(int argc, char const* argv[]) {
     int record_count = atoi(argv[1]);
     auto kv = generateKV_random(record_count);
 
-    struct timespec begin, end;
-    double tmpValue = 0.0;
-
-    //시간 측정 시작
-    clock_gettime(CLOCK_MONOTONIC, &begin);
+    clock_t start = clock(); // 시작 시간 저장
 
     for (auto i : kv) {
         if (s.ok()) s = db->Put(rocksdb::WriteOptions(), i.first, i.second);
     }
 
-    //시간 측정 끝
-    clock_gettime(CLOCK_MONOTONIC, &end);
+    clock_t end = clock(); // 코드가 끝난 시간 저장
 
-    timespec temp = diff(begin, end);
-    long time = temp.tv_sec + temp.tv_nsec;
-
-    printf("Time (ms): %lf\n", (double)time / 1000000000);
+    printf("Time: %lf\n", (double)(end - start)/CLOCKS_PER_SEC);
 
     string cmd = "rm -rf " + PATH;
     system(cmd.c_str());
