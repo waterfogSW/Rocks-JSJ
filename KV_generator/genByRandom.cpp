@@ -29,7 +29,7 @@ string string_format(const std::string& format, Args... args) {
     return std::string(buf.get(), buf.get() + size - 1);
 }
 
-vector<pair<string, string>> generateKV_random(int record_count) {
+vector<pair<string, string>> generateKV_random_high(int record_count) {
     try {
         if (record_count <= 0) throw record_count;
     } catch (int exception) {
@@ -48,6 +48,33 @@ vector<pair<string, string>> generateKV_random(int record_count) {
         string deliveryTime = getCurrentTime();
 
         key     = sequenceNum + deliveryTime;
+        value   = sequenceNum + "11" + deliveryTime + "3645000";
+
+        result.push_back({key, value});
+    }
+
+    return result;
+}
+
+vector<pair<string, string>> generateKV_random_low(int record_count) {
+    try {
+        if (record_count <= 0) throw record_count;
+    } catch (int exception) {
+        cout << "record count must be over then 0" << '\n';
+    }
+
+    vector<pair<string, string>> result;
+
+    int index = 0;
+
+    for (int i = 0; i < record_count; i++) {
+        string key;
+        string value;
+        
+        string sequenceNum = to_string(index++);
+        string deliveryTime = getCurrentTime();
+
+        key     = deliveryTime + sequenceNum;
         value   = sequenceNum + "11" + deliveryTime + "3645000";
 
         result.push_back({key, value});
