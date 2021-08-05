@@ -4,29 +4,52 @@
 #include "rocksdb/db.h"
 using namespace std;
 
-string kDBPath = "~/workspace/RocksDB_test";
+const string PATH = "/home/san/workspace/Rocks-JSJ/RsDB";
+
+timespec diff(timespec start, timespec end) {
+    timespec temp;
+
+    if ((end.tv_nsec - start.tv_nsec) < 0) {
+        temp.tv_sec = end.tv_sec - start.tv_sec - 1;
+        temp.tv_nsec = 1000000000 + end.tv_nsec - start.tv_nsec;
+    } else {
+        temp.tv_sec = end.tv_sec - start.tv_sec;
+        temp.tv_nsec = end.tv_nsec - start.tv_nsec;
+    }
+    return temp;
+}
 
 int main(int argc, char const* argv[]) {
     rocksdb::DB* db;
     rocksdb::Options options;
-    rocksdb::Status s = rocksdb::DB::Open(options, kDBPath, &db);
-    assert(s.ok());
+    options.create_if_missing = true;
+    rocksdb::Status status = rocksdb::DB::Open(options, PATH, &db);
+    assert(status.ok());
 
-    cout << "코드 작성중입니다" << '\n';
-    auto kv = generateKV_random(1000000);
+    rocksdb::Status s;
 
-    //MK: 시작/끝 시간을 측정하기 위해서 추가
+    int record_count = atoi(argv[1]);
+    auto kv = generateKV_random(record_count);
+
     struct timespec begin, end;
     double tmpValue = 0.0;
 
-    //MK: 연산 시작과 함께 시간을 측정함
+    //시간 측정 시작
     clock_gettime(CLOCK_MONOTONIC, &begin);
 
     for (auto i : kv) {
         if (s.ok()) s = db->Put(rocksdb::WriteOptions(), i.first, i.second);
     }
 
-    //MK: 연산이 끝나면 시간을 측정함
+    //시간 측정 끝
     clock_gettime(CLOCK_MONOTONIC, &end);
-    cout << tmpValue;
+
+    timespec temp = diff(begin, end);
+    long time = temp.tv_sec + temp.tv_nsec;
+
+    printf("Time (ms): %lf\n", (double)time / 1000000000);
+
+    string cmd = "rm -rf " + PATH;
+    system(cmd.c_str());
+    return 0;
 }
