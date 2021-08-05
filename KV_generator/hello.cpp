@@ -29,7 +29,8 @@ void test(int flag, int record_count) {
 
     clock_t end = clock(); // 코드가 끝난 시간 저장
 
-    flag ? cout << "high " : cout << "low ";
+    flag ? cout << "Sequence Number At High bits "
+         : cout << "Sequence Number At Low  bits ";
     printf("Time: %lf\n", (double)(end - start)/CLOCKS_PER_SEC);
 
     string cmd = "rm -rf " + PATH;
